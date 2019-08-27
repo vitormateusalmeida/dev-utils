@@ -1,18 +1,23 @@
 #!/bin/bash
 
+LGREEN='\033[1;32m'
+NC='\033[0m'
+
 if ! [ -x "$(command -v gifsicle --help)" ]; then
+  printf "${LGREEN}Installing gifsicle... ${NC}\n";
   sudo apt-get update -yq && sudo apt-get install gifsicle -yq >&2
 fi
 
-echo -n "Nome/Caminho do arquivo gif: "
+printf "${LGREEN}Nome/Caminho do arquivo gif: ${NC}";
 read archive
-echo ""
-echo -n "Escala(0.5): "
+printf "\n";
+printf "${LGREEN}Escala(0.5): ${NC}";
 read scale
-echo ""
-echo -n "Nome/Caminho do arquivo gif comprimido: "
+printf "\n";
+printf "${LGREEN}Nome/Caminho do arquivo gif comprimido: ${NC}";
 read newarchive
-echo ""
-echo "Executando gifsicle ..."
+printf "\n";
+printf "${LGREEN}Executando gifsicle ... ${NC}";
 gifsicle -i $archive --optimize=3 --scale=${scale:=0.5} -o $newarchive && 
-echo "Done!"
+
+printf "\n\n${LGREEN}Done!${NC}\n";
